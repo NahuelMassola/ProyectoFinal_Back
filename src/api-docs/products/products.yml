@@ -1,174 +1,232 @@
 paths:
   /api/products/:
     get:
-      summary: obtiene todos los productos de la base de datos
+      summary: Obtiene todos los productos de la base de datos
       tags:
-        - 'Products'
+        - Products
       responses:
         '200':
-          description: Se obtuvieron los productos correctamente
+          description: Se obtuvieron todos los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
         '500':
-          description: Se produjo un error en la conexion del servidor
+          description: Error al obtener todos los productos de la base de datos
     post:
-      summary: Agregar producto en la bd
+      summary: Agregar un Producto a la base de datos
       tags:
-        - 'Products'
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: descripcion del producto
+          required: true
+          schema:
+            $type: string
       responses:
         '200':
-          description: Se Agrego producto correctamente
+          description: Se Agrego Correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ProductAdd'
         '401':
-          description: Usuario No autorizado  
-        '500':
-          description: Error al Agregar producto  
-#       requestBody:
-#         content:
-#           application/json:
-#             schema:
-#               $ref: '#/components/requestBodies/addProductBd'      
-# components:            
-#   requestBodies:
-#     addProductBd:
-#       type: object
-#       properties:
-#         title:
-#           type: String
-#           description: Titulo del Producto
-#         description:
-#           type: String
-#           description: Descripcion del Producto
-#         code:
-#           type: String
-#           description: Codigo del Producto
-#         price:
-#           type: Number
-#           description: Precio del Producto
-#         status:
-#           type: Boolean 
-#           description: Estado del Producto
-#         stock: 
-#           type: Number
-#           description: Cantidad del Producto 
-#         category:
-#           type: String
-#           description: Categoria del Producto
-#         owner:
-#           type: String
-#           description: Creador del Producto
-#         thumbnail:
-#           type: String
-#           description: Link Imagen del Producto
-#       example:
-#         title: "Mery1"
-#         description: "textil 500g "
-#         code: "mery1"
-#         price: 750
-#         status: true
-#         stock: 10
-#         category: "chico1"
-#         thumbnail: "Enlase 1"           
+          description: Usuario NO Autorizado
+        '500': 
+          description:  Error al agregar un Producto
 
   /api/products/{pid}:
     get:
-      summary: obtiene Producto por ID
+      summary: Obtiene un producto por el id de la base de datos
       tags:
-        - 'Products'
+        - Products
       parameters:
         - name: pid
           in: path
-          description: identificador del producto
+          description: Id del producto
           required: true
           schema:
-            $type: String
+            $type: string
       responses:
         '200':
-          description: Se obtuvo el producto correctamente
+          descrition: Se obtuvo el Producto correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ProductId'
         '401':
-          description: Producto no encontrado 
+          descrition: Producto no encontrado
     put:
-      summary: Actualizar producto en la bd
+      summary: Actualiza el Producto de la Base de datos
       tags:
-        - 'Products'
+      - Products
       parameters:
         - name: pid
           in: path
-          description: identificador del producto
+          description: Id del producto
           required: true
           schema:
-            $type: String
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/requestBodies/updateProductBd'
+            $type: string
       responses:
         '200':
-          description: Se Agrego producto correctamente
+          description: Se Actualizo el Producto Correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ProductUpdate'
         '403':
-          description: El id ingresado no es el correcto  
+          description: El Id ingresado es incorrecto
         '500':
-          description: Error al actualizar producto  
-components:            
-  requestBodies:
-    updateProductBd:
-      type: object
+          description: Error al Actualizar Producto  
+
+components:
+  schemas:
+  # GET PRODUCTS
+    Product:
       properties:
         title:
-          type: String
-          description: Titulo del Producto
+          type: string
+          description: Titulo del Producto 
         description:
-          type: String
+          type: string
           description: Descripcion del Producto
         code:
-          type: String
+          type: string
           description: Codigo del Producto
-        price:
+        price: 
           type: Number
-          description: Precio del Producto
-        status:
-          type: Boolean 
-          description: Estado del Producto
-        stock: 
+          description: Precio del Prodcuto
+        stock:
           type: Number
-          description: Cantidad del Producto 
-        category:
-          type: String
+          description: Stock del Producto
+        Category:
+          typr: string
           description: Categoria del Producto
+        thumbail: 
+          type: String
+          description: Imagen del Producto
         owner:
-          type: String
-          description: Creador del Producto
-        thumbnail:
-          type: String
-          description: Link Imagen del Producto
+          type: string
+          description: Rol Por defecto Admin
       example:
-        title: "MeryActualizado1"
-        description: "textil 500g "
-        code: "mery1"
-        price: 750
-        status: true
-        stock: 10
-        category: "chico1"
-        thumbnail: "Enlase 1"    
-    
-    delete:
-      summary: Eliminar producto en la bd
-      tags:
-        - 'Products'
-      parameters:
-        - name: pid
-          in: path
-          description: identificador del producto
-          required: true
-          schema:
-            $type: String
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/requestBodies/deleteProductBd'
-      responses:
-        '200':
-          description: Se eliminaron los productos correctamente
-        '401':
-          description: Producto No Existe 
-        '500':
-          description: Se produjo un error en la conexion del servidor   
+        title: Remera Vans
+        description: Remera de algodon
+        code: 46465
+        price: 1000
+        stock: 5
+        Category: Remera Manga Corta
+        Thumbail: Enlace 1
+        owner: Admin
+  # PRODUCTO POR ID
+    ProductId:
+      properties:
+        _id:
+          type: ObjectId
+          description: Id Generado por mongo 
+        title:
+          type: string
+          description: Titulo del Producto 
+        description:
+          type: string
+          description: Descripcion del Producto
+        code:
+          type: string
+          description: Codigo del Producto
+        price: 
+          type: Number
+          description: Precio del Prodcuto
+        stock:
+          type: Number
+          description: Stock del Producto
+        Category:
+          typr: string
+          description: Categoria del Producto
+        thumbail: 
+          type: String
+          description: Imagen del Producto  
+        owner:
+          type: string
+          description: Rol Por defecto Admin
+      example:
+        id: 642cc73acc02f558eed80d3h
+        title: Remera Vans
+        description: Remera de algodon
+        code: 46465
+        price: 1000
+        stock: 5
+        Category: Remera Manga Corta
+        thumbail: Enlace 1
+        owner: Admin
+  # AGREGAR PRODUCTO
+    ProductAdd:
+      properties:
+        title:
+          type: string
+          description: Titulo del Producto 
+        description:
+          type: string
+          description: Descripcion del Producto
+        code:
+          type: string
+          description: Codigo del Producto
+        price: 
+          type: Number
+          description: Precio del Prodcuto
+        stock:
+          type: Number
+          description: Stock del Producto
+        Category:
+          typr: string
+          description: Categoria del Producto
+        thumbail: 
+          type: String
+          description: Imagen del Producto
+      example:
+        title: Remera Vans
+        description: Remera de algodon
+        code: 46465
+        price: 1000
+        stock: 5
+        Category: Remera Manga Corta
+        thumbail: Enlace 1
+  # ACTUALIZAR PRODUCTO
+    ProductUpdate:
+      properties:
+        title:
+          type: string
+          description: Titulo del Producto 
+        description:
+          type: string
+          description: Descripcion del Producto
+        code:
+          type: string
+          description: Codigo del Producto
+        price: 
+          type: Number
+          description: Precio del Prodcuto
+        stock:
+          type: Number
+          description: Stock del Producto
+        Category:
+          typr: string
+          description: Categoria del Producto
+        thumbail: 
+          type: String
+          description: Imagen del Producto
+      example:
+        title: Remera Vans
+        description: Remera de algodon
+        code: 46465
+        price: 1000
+        stock: 5
+        Category: Remera Manga Corta
+        thumbail: Enlace 1

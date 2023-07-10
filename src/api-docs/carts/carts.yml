@@ -1,25 +1,34 @@
 paths:
   /api/carts/:
-    post:
-      summary: Crear Carrito de Compra
+    get:
+      summary: Obtiene todos los Carritos de la base de datos
       tags:
-        - 'Carts'
+        - Carts
       responses:
         '200':
-          description: Carrito Creado con exito
+          description: Se obtuvieron todos los Carritos
         '500':
-          description: No se pudo Crear Carrito
-        '401':
-          description: Usuario no Autorizado / o no logeado  
-  /api/carts/{cid}:
-    get:
-      summary: Visualiza Carrito por Id
+          description: Error al obtener todos los productos de la base de datos\
+    post:
+      summary: crear Carrito de Compra
       tags:
-        - 'Carts'
+        - Carts
+      responses:
+        '200':
+          description: carrito creado Con Exito
+        '401':
+          description: Usuario no Autorizado o no logueado
+        '500':
+          description: Error al crear carrito
+  /api/carts/{cid}:  
+    get:
+      summary: Visualizar Carrito por Id 
+      tags:
+        - Carts
       parameters:
         - name: cid
           in: path
-          description: identificador del carrito
+          description: Identificador del carrito 
           required: true
           schema:
             $type: String
@@ -27,6 +36,66 @@ paths:
         '200':
           description: Carrito Encontrado
         '401':
-          description: Carrito no encontrado
+          description: Carrito NO Encontrado
         '500':
-          description: Se produjo un error al obtener el carrito        
+          description: Error al obtener un carrito 
+    post:
+      summary: Agregar Productos al Carrito
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        description: id del carrito 
+        required: true
+        schema:
+          $type: String
+      responses:
+        '200':
+          description: Productos Agregados Al Carrito
+        '400':
+          description: Carrito No Encontrado
+        '500':
+          description: Error al Agregar Productos al carrito
+    delete:
+      summary: Eliminar todos los producto del carrito
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        description: id del carrito 
+        required: true
+        schema:
+          $type: String
+      responses:
+        '200':
+          description:  Carrito Vacio
+        '500':
+          description:  Error al eliminar todos los productos del carrito
+  /api/carts/{cid}/product/{pid}:
+    delete:
+      summary: Eliminar 1 producto del carrito 
+      tags:
+      - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: id del carrito 
+          required: true
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          description: id del Producto 
+          required: true
+          schema:
+            $type: String
+      responses:
+        '200':
+          description: Producto Eliminado
+        '401':
+          description: Carrito no Encontrado / Producto no encontrado / Producto no Existe en el carrito
+        '500':
+          description:  Error al Eliminar un Producto del carrito
+  

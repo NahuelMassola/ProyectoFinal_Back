@@ -3,14 +3,18 @@ const path = require('path');
 const { program } = require('commander');
 const { logger } = require('./config.winston');
 
-program.requiredOption('--mode <mode>', 'modo de ejecucion del servidor', 'development');
+dotenv.config({ path: `.env.${process.env.ENVIROMENT || "development"}`}) ;
+
+logger.info(`'MODE : ${process.env.ENVIROMENT}'`)
+
+/* program.requiredOption('--mode <mode>', 'modo de ejecucion del servidor', 'development');
 program.parse();
 
 const ambiente = program.opts().mode;
 
 dotenv.config({
   path: path.join(__dirname, ambiente == 'development' ? '../../.env.development' : '../../.env.production'),
-});
+}); */
 const TYPE_DOCUMENTS = [
   'Identificación'
   ,'Comprobante de domicilio',
