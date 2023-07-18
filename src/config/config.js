@@ -1,29 +1,22 @@
 const dotenv = require('dotenv');
-const path = require('path');
-const { program } = require('commander');
 const { logger } = require('./config.winston');
 
 dotenv.config({ path: `.env.${process.env.ENVIROMENT || "development"}`}) ;
 
 logger.info(`'MODE : ${process.env.ENVIROMENT}'`)
 
-/* program.requiredOption('--mode <mode>', 'modo de ejecucion del servidor', 'development');
-program.parse();
-
-const ambiente = program.opts().mode;
-
-dotenv.config({
-  path: path.join(__dirname, ambiente == 'development' ? '../../.env.development' : '../../.env.production'),
-}); */
 const TYPE_DOCUMENTS = [
   'Identificación'
   ,'Comprobante de domicilio',
   'Comprobante de estado de cuenta'
 ]
-logger.info(`"mode: ${process.env.ENVIRONMENT}`)
+
 module.exports ={
   NODE:process.env.ENVIRONMENT,
   MONGODBURL: process.env.MONGODBURL,
+  DB_NAME: process.env.DB_NAME,
+  DB_PASSWORD:process.env.DB_PASSWORD,
+  DB_HOST:process.env.DB_HOST,
   PRIVATE_KEY_JWT: process.env.PRIVATE_KEY_JWT,
   REGISTER_STRATEGY: process.env.REGISTER_STRATEGY,
   LOGIN_STRATEGY: process.env.LOGIN_STRATEGY,

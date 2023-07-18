@@ -25,12 +25,11 @@ if (MONGODBURL) import('./config/config.db.js');
 
 server.use(cors({
     origin:'http://127.0.0.1:5173',
-    //origin:'http://localhost:5173',
     credentials:true,  
 }))
 
 const httpServer = server.listen(PORT || 3000,  () => 
- logger.debug(`🔥 Server started on port http://localhost:${PORT}`),
+    logger.debug(`🔥 Server started on port http://localhost:${PORT}`),
 )
 
 //handlerbars
