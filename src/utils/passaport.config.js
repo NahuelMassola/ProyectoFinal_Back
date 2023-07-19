@@ -6,7 +6,7 @@ const { generateToken } = require("./jwt");
 const { COOKIE_USER, JWT_STRATEGY, REGISTER_STRATEGY, LOGIN_STRATEGY, PRIVATE_KEY_JWT } = require("../config/config");
 const { sesionServices, cartsServices } = require("../service");
 const { default: mongoose } = require("mongoose");
-const { logger } = require("../config/config.winston");
+
 
 const cookieEstractor = (req) =>{
 

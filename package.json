@@ -8,7 +8,8 @@
     "test:products": "mocha --timeout 2000 ./src/test/products/supertest.js",
     "test:carts": "mocha --timeout 2000 ./src/test/carts/supertest.js",
     "start:dev": "cross-env ENVIROMENT=development nodemon ./src/app.js",
-    "start:prod": "cross-env ENVIROMENT=production nodemon ./src/app.js"
+    "start:prod": "cross-env ENVIROMENT=production nodemon ./src/app.js",
+    "start": "node src/app.js" 
   },
   "keywords": [],
   "author": "Nahuel Dellacecca",

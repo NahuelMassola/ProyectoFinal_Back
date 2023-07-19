@@ -12,7 +12,7 @@ const paymentsRute = require('./routes/payments.router')
 const  initPassaport  = require('./utils/passaport.config');
 const passport = require('passport');
 const cookieParse = require('cookie-parser');
-const {PORT, MONGODBURL } = require('./config/config');
+const { MONGODBURL } = require('./config/config');
 const mdwError = require('./utils/middleware/errors');
 const {mdwLooger, logger} = require('./config/config.winston')
 const loggerTest = require('./controller/logger.controller');
@@ -28,7 +28,9 @@ server.use(cors({
     credentials:true,  
 }))
 
-const httpServer = server.listen(PORT || 3000,  () => 
+const PORT = process.env.PORT || 3000
+
+const httpServer = server.listen(PORT ,  () => 
     logger.debug(`🔥 Server started on port http://localhost:${PORT}`),
 )
 

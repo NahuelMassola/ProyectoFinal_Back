@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const { logger } = require('./config.winston');
 
-dotenv.config({ path: `.env.${process.env.ENVIROMENT || "development"}`}) ;
+dotenv.config({ path: `.env.${process.env.ENVIROMENT || "production"}`}) ;
 
 logger.info(`'MODE : ${process.env.ENVIROMENT}'`)
 
