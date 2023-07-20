@@ -1,13 +1,13 @@
 const dotenv = require('dotenv');
 const { logger } = require('./config.winston');
 
-dotenv.config({ path: `.env.${process.env.ENVIROMENT || "production"}`}) ;
+dotenv.config({ path: `.env.${process.env.ENVIROMENT || "development"}`}) ;
 
 logger.info(`'MODE : ${process.env.ENVIROMENT}'`)
 
 const TYPE_DOCUMENTS = [
-  'Identificación'
-  ,'Comprobante de domicilio',
+  'Identificación',
+  'Comprobante de domicilio',
   'Comprobante de estado de cuenta'
 ]
 
@@ -29,8 +29,6 @@ module.exports ={
   MEILING:{
     user:process.env.USERMAILING,
     password:process.env.PASSWORDMAILING
-
   },
   TYPE_DOCUMENTS,
-
 }

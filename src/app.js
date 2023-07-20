@@ -31,7 +31,7 @@ server.use(cors({
 const PORT = process.env.PORT || 3000
 
 const httpServer = server.listen(PORT ,  () => 
-    logger.debug(`🔥 Server started on port http://localhost:${PORT}`),
+    logger.debug(`🔥 Server started on port http://localhost:${PORT}/login`),
 )
 
 //handlerbars

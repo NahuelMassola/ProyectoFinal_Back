@@ -1,5 +1,4 @@
-const { Console } = require("winston/lib/winston/transports")
-const { productServices, cartsServices } = require("../service")
+const { cartsServices } = require("../service")
 const paymentsService = require("../service/payments.service")
 
 
